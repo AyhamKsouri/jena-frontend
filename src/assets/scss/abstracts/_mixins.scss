@@ -1,0 +1,38 @@
+// =============================================================================
+// Responsive Mixins - Mobile First
+// =============================================================================
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: 576px) { @content; }
+  }
+  @else if $breakpoint == md {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $breakpoint == lg {
+    @media (min-width: 992px) { @content; }
+  }
+  @else if $breakpoint == xl {
+    @media (min-width: 1200px) { @content; }
+  }
+}
+
+// Focus ring for accessibility
+@mixin focus-ring($color: #197bbd) {
+  outline: 2px solid $color;
+  outline-offset: 2px;
+}
+
+// Flex center utility
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Text truncate utility
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

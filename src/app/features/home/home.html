@@ -1,0 +1,119 @@
+<section class="homepage">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">Votre Santé, Notre Priorité</h1>
+        <p class="hero-subtitle">Découvrez une large gamme de produits de parapharmacie pour toute la famille. Qualité, confiance et conseils experts.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" routerLink="/shop">Acheter Maintenant</button>
+          <button class="btn btn-secondary">Nos Promotions</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="placeholder-image">Image Hero</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Pourquoi Choisir Jena?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🚚</div>
+          <h3>Livraison Rapide</h3>
+          <p>Livraison à domicile dans toute la Tunisie sous 48h</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💊</div>
+          <h3>Produits Authentiques</h3>
+          <p>100% des produits certifiés et garantis authentiques</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">👨‍⚕️</div>
+          <h3>Conseils Experts</h3>
+          <p>Équipe de pharmaciens à votre service</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Prix Compétitifs</h3>
+          <p>Meilleurs prix garantis sur tous nos produits</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Categories -->
+  <section class="categories">
+    <div class="container">
+      <h2 class="section-title">Nos Catégories</h2>
+      <div class="categories-grid">
+        <div class="category-card" routerLink="/shop" [queryParams]="{category: 'bebe'}">
+          <div class="category-image">
+            <div class="placeholder-image">Bébé & Maman</div>
+          </div>
+          <h3>Bébé & Maman</h3>
+          <p>Soins et produits essentiels</p>
+        </div>
+        <div class="category-card" routerLink="/shop" [queryParams]="{category: 'beaute'}">
+          <div class="category-image">
+            <div class="placeholder-image">Beauté & Soins</div>
+          </div>
+          <h3>Beauté & Soins</h3>
+          <p>Cosmétiques et produits de beauté</p>
+        </div>
+        <div class="category-card" routerLink="/shop" [queryParams]="{category: 'hygiene'}">
+          <div class="category-image">
+            <div class="placeholder-image">Hygiène</div>
+          </div>
+          <h3>Hygiène</h3>
+          <p>Produits d'hygiène quotidienne</p>
+        </div>
+        <div class="category-card" routerLink="/shop" [queryParams]="{category: 'sante'}">
+          <div class="category-image">
+            <div class="placeholder-image">Santé & Bien-être</div>
+          </div>
+          <h3>Santé & Bien-être</h3>
+          <p>Compléments et produits naturels</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Promotional Banner -->
+  <section class="promo-banner">
+    <div class="container">
+      <div class="promo-content">
+        <h2>Première Commande?</h2>
+        <p>Obtenez 10% de réduction avec le code: <strong>BIENVENUE10</strong></p>
+        <button class="btn btn-white" routerLink="/shop">Profiter de l'offre</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Signals -->
+  <section class="trust">
+    <div class="container">
+      <div class="trust-items">
+        <div class="trust-item">
+          <div class="trust-number">5000+</div>
+          <div class="trust-label">Clients Satisfaits</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-number">1000+</div>
+          <div class="trust-label">Produits</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-number">24/7</div>
+          <div class="trust-label">Support Client</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-number">100%</div>
+          <div class="trust-label">Sécurisé</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

@@ -1,0 +1,288 @@
+// Since we added includePaths, we can use simpler imports
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+.homepage {
+  min-height: 100vh;
+}
+
+.hero {
+  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  color: $white;
+  padding: $spacing-8 0;
+  
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-5;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-8;
+    align-items: center;
+
+    @include respond-to(lg) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .hero-title {
+    font-size: $font-size-4xl;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: $spacing-5;
+    color: $white;
+
+    @include respond-to(lg) {
+      font-size: $font-size-5xl;
+    }
+  }
+
+  .hero-subtitle {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-6;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: $spacing-4;
+    flex-wrap: wrap;
+  }
+
+  .hero-image {
+    text-align: center;
+    
+    .placeholder-image {
+      width: 100%;
+      height: 300px;
+      background: rgba($white, 0.1);
+      border-radius: $border-radius-lg;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-size-lg;
+      color: rgba($white, 0.7);
+    }
+  }
+}
+
+.features {
+  padding: $spacing-10 0;
+  background-color: $background-secondary;
+
+  .section-title {
+    text-align: center;
+    margin-bottom: $spacing-8;
+    color: $text-primary;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-6;
+
+    @include respond-to(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .feature-card {
+    text-align: center;
+    padding: $spacing-6;
+    background: $white;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-sm;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: $spacing-4;
+  }
+
+  .feature-card h3 {
+    margin-bottom: $spacing-3;
+    color: $text-primary;
+  }
+
+  .feature-card p {
+    color: $text-secondary;
+    line-height: 1.5;
+  }
+}
+
+.categories {
+  padding: $spacing-10 0;
+
+  .section-title {
+    text-align: center;
+    margin-bottom: $spacing-8;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-6;
+
+    @include respond-to(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .category-card {
+    background: $white;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  .category-image {
+    height: 200px;
+    overflow: hidden;
+    
+    .placeholder-image {
+      width: 100%;
+      height: 100%;
+      background: $gray-100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $text-secondary;
+      font-weight: 500;
+    }
+  }
+
+  .category-card h3 {
+    padding: $spacing-4 $spacing-4 0;
+    margin-bottom: $spacing-2;
+    color: $text-primary;
+  }
+
+  .category-card p {
+    padding: 0 $spacing-4 $spacing-4;
+    color: $text-secondary;
+  }
+}
+
+.promo-banner {
+  background: linear-gradient(135deg, $secondary 0%, darken($secondary, 10%) 100%);
+  color: $white;
+  padding: $spacing-8 0;
+  text-align: center;
+
+  .promo-content h2 {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-4;
+    color: $white;
+  }
+
+  .promo-content p {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-6;
+    opacity: 0.9;
+  }
+}
+
+.trust {
+  padding: $spacing-10 0;
+  background-color: $background-primary;
+
+  .trust-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-8;
+
+    @include respond-to(sm) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .trust-item {
+    text-align: center;
+  }
+
+  .trust-number {
+    font-size: $font-size-4xl;
+    font-weight: 700;
+    color: $primary;
+    margin-bottom: $spacing-2;
+  }
+
+  .trust-label {
+    color: $text-secondary;
+    font-weight: 500;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-5;
+}
+
+.section-title {
+  font-size: $font-size-3xl;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.btn {
+  padding: $spacing-3 $spacing-6;
+  border-radius: $border-radius;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+
+  &-primary {
+    background: $white;
+    color: $primary;
+    
+    &:hover {
+      background: darken($white, 5%);
+    }
+  }
+
+  &-secondary {
+    background: transparent;
+    color: $white;
+    border-color: $white;
+    
+    &:hover {
+      background: $white;
+      color: $primary;
+    }
+  }
+
+  &-white {
+    background: $white;
+    color: $secondary;
+    
+    &:hover {
+      background: darken($white, 5%);
+    }
+  }
+}

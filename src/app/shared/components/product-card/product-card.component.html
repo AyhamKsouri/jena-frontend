@@ -1,0 +1,25 @@
+<div class="product-card" *ngIf="product">
+  <a [routerLink]="['/products', product.id]" class="product-card__link">
+    <div class="product-card__image-container">
+      <img [src]="product.imageUrl" [alt]="product.name" class="product-card__image">
+      <div class="product-card__badges" *ngIf="product.isNew || product.discount">
+        <span class="product-card__badge product-card__badge--new" *ngIf="product.isNew">New</span>
+        <span class="product-card__badge product-card__badge--sale" *ngIf="product.discount">-{{product.discount}}%</span>
+      </div>
+    </div>
+    
+    <div class="product-card__content">
+      <h3 class="product-card__title">{{product.name}}</h3>
+      <p class="product-card__category">{{product.category}}</p>
+      
+      <div class="product-card__price">
+        <span class="product-card__current-price">{{product.price | currency}}</span>
+        <span class="product-card__original-price" *ngIf="product.originalPrice">{{product.originalPrice | currency}}</span>
+      </div>
+    </div>
+  </a>
+  
+  <button class="product-card__add-to-cart" (click)="addProductToCart($event)">
+    Add to Cart
+  </button>
+</div>

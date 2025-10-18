@@ -1,0 +1,33 @@
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo">
+      <a routerLink="/">
+        <h1>JENA</h1>
+      </a>
+    </div>
+    
+    <nav class="header__nav">
+      <ul class="header__nav-list">
+        @for (item of navItems; track item.label) {
+          <li class="header__nav-item">
+            <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">{{ item.label }}</a>
+              {{ item.label }}
+          </li>
+        }
+      </ul>
+    </nav>
+    
+    <div class="header__actions">
+      <button class="header__action-btn" aria-label="Search">
+        <i class="fas fa-search"></i>
+      </button>
+      <button class="header__action-btn" aria-label="Shopping Cart" routerLink="/cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="header__cart-count">0</span>
+      </button>
+      <button class="header__action-btn" aria-label="User Account">
+        <i class="fas fa-user"></i>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,90 @@
+// =============================================================================
+// Color System - Based on Pharma/Healthcare Trust & Professionalism
+// =============================================================================
+
+// Primary Colors
+$primary: #197bbd;
+$primary-dark: #1468a3;
+$primary-light: #5ca8e0;
+
+// Secondary Colors
+$secondary: #2ecc71;
+$accent: #e74c3c;
+
+// Neutral Colors
+$white: #ffffff;
+$gray-50: #f8f9fa;
+$gray-100: #e9ecef;
+$gray-200: #dee2e6;
+$gray-300: #ced4da;
+$gray-400: #adb5bd;
+$gray-500: #6c757d;
+$gray-600: #495057;
+$gray-700: #343a40;
+$gray-800: #212529;
+$gray-900: #1a1a1a;
+$black: #000000;
+
+// Background Colors
+$background-primary: $white;
+$background-secondary: $gray-50;
+
+// Text Colors
+$text-primary: $gray-900;
+$text-secondary: $gray-600;
+$text-light: $gray-500;
+
+// =============================================================================
+// Typography Scale
+// =============================================================================
+
+$font-family-primary: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+$font-size-xs: 0.75rem;   // 12px
+$font-size-sm: 0.875rem;  // 14px
+$font-size-base: 1rem;    // 16px
+$font-size-lg: 1.125rem;  // 18px
+$font-size-xl: 1.25rem;   // 20px
+$font-size-2xl: 1.5rem;   // 24px
+$font-size-3xl: 1.875rem; // 30px
+$font-size-4xl: 2.25rem;  // 36px
+$font-size-5xl: 3rem;     // 48px
+
+// =============================================================================
+// Spacing Scale
+// =============================================================================
+
+$spacing-1: 0.25rem;  // 4px
+$spacing-2: 0.5rem;   // 8px
+$spacing-3: 0.75rem;  // 12px
+$spacing-4: 1rem;     // 16px
+$spacing-5: 1.5rem;   // 24px
+$spacing-6: 2rem;     // 32px
+$spacing-7: 2.5rem;   // 40px
+$spacing-8: 3rem;     // 48px
+$spacing-9: 4rem;     // 64px
+$spacing-10: 5rem;    // 80px
+
+// =============================================================================
+// Breakpoints
+// =============================================================================
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// =============================================================================
+// Border Radius
+// =============================================================================
+
+$border-radius: 0.375rem;
+$border-radius-lg: 0.75rem;
+
+// =============================================================================
+// Shadows
+// =============================================================================
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
