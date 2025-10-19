@@ -13,30 +13,30 @@ export class FooterComponent {
   
   footerLinks = [
     {
-      title: 'Shop',
+      title: 'Boutique',
       links: [
-        { label: 'All Products', path: '/products' },
-        { label: 'New Arrivals', path: '/products/new' },
-        { label: 'Best Sellers', path: '/products/best-sellers' },
-        { label: 'Sale', path: '/products/sale' }
+        { label: 'Tous les produits', path: '/products' },
+        { label: 'Nouveautés', path: '/products/new' },
+        { label: 'Meilleures ventes', path: '/products/best-sellers' },
+        { label: 'Promotions', path: '/products/sale' }
       ]
     },
     {
-      title: 'Company',
+      title: 'Entreprise',
       links: [
-        { label: 'About Us', path: '/about' },
+        { label: 'À propos', path: '/about' },
         { label: 'Contact', path: '/contact' },
         { label: 'Blog', path: '/blog' },
-        { label: 'Careers', path: '/careers' }
+        { label: 'Carrières', path: '/careers' }
       ]
     },
     {
-      title: 'Customer Service',
+      title: 'Service client',
       links: [
         { label: 'FAQ', path: '/faq' },
-        { label: 'Shipping & Returns', path: '/shipping-returns' },
-        { label: 'Privacy Policy', path: '/privacy-policy' },
-        { label: 'Terms & Conditions', path: '/terms' }
+        { label: 'Livraison & Retours', path: '/shipping-returns' },
+        { label: 'Politique de confidentialité', path: '/privacy-policy' },
+        { label: 'Conditions générales', path: '/terms' }
       ]
     }
   ];

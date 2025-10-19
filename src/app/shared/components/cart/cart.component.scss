@@ -386,6 +386,22 @@
   }
 }
 
+// Mobile tweaks
+@media (max-width: 480px) {
+  .cart {
+    padding: 1.25rem 0.75rem;
+  }
+  .cart__title {
+    font-size: 1.5rem;
+  }
+  .cart__content {
+    gap: 1rem;
+  }
+  .cart__item-details {
+    overflow-wrap: anywhere;
+  }
+}
+
 // Animation for quantity changes
 @keyframes quantityUpdate {
   0% { transform: scale(1); }

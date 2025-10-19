@@ -1,4 +1,12 @@
 // Global app styles can go here
 main {
   min-height: 100vh;
+  padding-top: 80px; /* Offset for fixed header */
+}
+
+/* Adjust offset for smaller screens */
+@media (max-width: 768px) {
+  main {
+    padding-top: 64px;
+  }
 }

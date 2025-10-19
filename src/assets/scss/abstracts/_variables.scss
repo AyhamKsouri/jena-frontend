@@ -1,15 +1,23 @@
 // =============================================================================
-// Color System - Based on Pharma/Healthcare Trust & Professionalism
+// Color System - Updated with Requested Color Palette
 // =============================================================================
 
-// Primary Colors
-$primary: #197bbd;
-$primary-dark: #1468a3;
-$primary-light: #5ca8e0;
+// Primary Colors (Green/Blue as requested)
+$primary: #2ecc71;        // Green for primary actions
+$primary-dark: #27ae60;
+$primary-light: #58d68d;
 
-// Secondary Colors
-$secondary: #2ecc71;
-$accent: #e74c3c;
+// Secondary Colors (Blue as requested)
+$secondary: #3498db;      // Blue for secondary actions
+$accent: #a8e6cf;         // Mint for accents
+
+// Accent Colors (Mint, Pink, Brown as requested)
+$mint: #a8e6cf;
+$mint-dark: #88d4b8;
+$pink: #ffb6c1;
+$pink-dark: #ff91a4;
+$brown: #8b7355;
+$brown-light: #a59072;
 
 // Neutral Colors
 $white: #ffffff;
@@ -25,7 +33,7 @@ $gray-800: #212529;
 $gray-900: #1a1a1a;
 $black: #000000;
 
-// Background Colors
+// Background Colors (Mostly white/neutral as requested)
 $background-primary: $white;
 $background-secondary: $gray-50;
 

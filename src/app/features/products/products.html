@@ -1,47 +1,120 @@
 <section class="products-page">
   <div class="container">
     <div class="page-header">
-      <h1>Produits</h1>
-      <p>Parcourez nos produits et trouvez ce qui vous convient.</p>
+      <h1>Nos Produits</h1>
+      <p>Découvrez notre large gamme de produits de parapharmacie pour toute la famille</p>
     </div>
 
     <div class="filters">
-      <div class="filters__group">
-        <label for="search">Recherche</label>
-        <input id="search" type="text" [(ngModel)]="searchTerm" (input)="applyFilters()" placeholder="Rechercher un produit..." />
+      <div class="filters__main">
+        <div class="filters__group">
+          <label for="search">Rechercher</label>
+          <input 
+            id="search" 
+            type="text" 
+            [(ngModel)]="searchTerm" 
+            (input)="applyFilters()" 
+            placeholder="Rechercher un produit..." 
+          />
+        </div>
+
+        <div class="filters__group">
+          <label for="category">Catégorie principale</label>
+          <select id="category" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+            <option value="all">Toutes les catégories</option>
+            @for (cat of mainCategories; track cat) {
+              <option [value]="cat">{{ cat }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="filters__group">
+          <label for="sort">Trier par</label>
+          <select id="sort" [(ngModel)]="sortKey" (change)="applyFilters()">
+            <option value="relevance">Pertinence</option>
+            <option value="priceLow">Prix: croissant</option>
+            <option value="priceHigh">Prix: décroissant</option>
+            <option value="newest">Nouveautés</option>
+            <option value="popular">Populaires</option>
+          </select>
+        </div>
       </div>
 
-      <div class="filters__group">
-        <label for="category">Catégorie</label>
-        <select id="category" [(ngModel)]="selectedCategory" (change)="applyFilters()">
-          <option value="all">Toutes</option>
-          @for (cat of categories; track cat) {
-            <option [value]="cat">{{ cat }}</option>
+      <!-- Enhanced category filter for 25+ categories -->
+      <div class="filters__advanced" *ngIf="showAdvancedFilters">
+        <label>Catégories détaillées</label>
+        <div class="filters__categories">
+          @for (category of allCategories; track category.name) {
+            <div 
+              class="category-pill" 
+              [class.active]="isCategoryActive(category.name)"
+              (click)="toggleCategory(category.name)"
+            >
+              <span>{{ category.name }}</span>
+              <span class="category-count">{{ category.count }}</span>
+            </div>
           }
-        </select>
+        </div>
       </div>
 
-      <div class="filters__group">
-        <label for="sort">Trier</label>
-        <select id="sort" [(ngModel)]="sortKey" (change)="applyFilters()">
-          <option value="relevance">Pertinence</option>
-          <option value="priceLow">Prix: bas à haut</option>
-          <option value="priceHigh">Prix: haut à bas</option>
-          <option value="newest">Nouveautés</option>
+      <button class="toggle-filters" (click)="showAdvancedFilters = !showAdvancedFilters">
+        {{ showAdvancedFilters ? 'Moins de filtres' : 'Plus de filtres' }}
+        <i class="fas" [class.fa-chevron-up]="showAdvancedFilters" [class.fa-chevron-down]="!showAdvancedFilters"></i>
+      </button>
+    </div>
+
+    <div class="results-info" *ngIf="filteredProducts.length > 0">
+      <div class="results-info__count">
+        {{ filteredProducts.length }} produit(s) trouvé(s)
+      </div>
+      <div class="results-info__sort">
+        <label>Afficher:</label>
+        <select [(ngModel)]="itemsPerPage" (change)="applyFilters()">
+          <option value="12">12 produits</option>
+          <option value="24">24 produits</option>
+          <option value="48">48 produits</option>
         </select>
       </div>
     </div>
 
     <div class="grid" *ngIf="filteredProducts.length > 0; else noResults">
-      @for (product of filteredProducts; track product.id) {
+      @for (product of currentPageProducts; track product.id) {
         <app-product-card [product]="product" (addToCart)="onAddToCart($event)"></app-product-card>
       }
+    </div>
+
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button class="pagination__btn" [class.disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">
+        ‹
+      </button>
+      
+      @for (page of getPages(); track page) {
+        @if (page === '...') {
+          <span class="pagination__dots">...</span>
+        } @else {
+          <button 
+            class="pagination__btn" 
+            [class.active]="currentPage === page"
+            (click)="changePage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+      }
+      
+      <button class="pagination__btn" [class.disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">
+        ›
+      </button>
     </div>
 
     <ng-template #noResults>
       <div class="no-results">
         <i class="fas fa-search"></i>
-        <p>Aucun produit ne correspond à votre recherche.</p>
+        <h3>Aucun produit trouvé</h3>
+        <p>Essayez de modifier vos critères de recherche ou explorez nos catégories.</p>
+        <button class="reset-filters" (click)="resetFilters()">
+          Réinitialiser les filtres
+        </button>
       </div>
     </ng-template>
   </div>

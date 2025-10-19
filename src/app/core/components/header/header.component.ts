@@ -13,9 +13,9 @@ export class HeaderComponent {
   menuOpen = false;
 
   navItems = [
-    { label: 'Home', path: '/' },
-    { label: 'Products', path: '/products' },
-    { label: 'About', path: '/about' },
+    { label: 'Accueil', path: '/' },
+    { label: 'Produits', path: '/products' },
+    { label: 'À propos', path: '/about' },
     { label: 'Contact', path: '/contact' },
     { label: 'Blog', path: '/blog' }
   ];

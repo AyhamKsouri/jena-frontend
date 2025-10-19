@@ -54,3 +54,24 @@
     text-decoration: none;
   }
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .detail-card {
+    gap: 1rem;
+    padding: 0.75rem;
+  }
+
+  .detail-card__title {
+    font-size: 1.25rem;
+  }
+
+  .detail-card__actions .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}

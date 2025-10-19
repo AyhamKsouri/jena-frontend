@@ -1,5 +1,5 @@
-@import 'abstracts/variables';
-@import 'abstracts/mixins';
+@import '../../../assets/scss/abstracts/variables.scss';
+@import '../../../assets/scss/abstracts/mixins.scss';
 
 .homepage {
   // Hero Section
@@ -77,31 +77,75 @@
       display: flex;
       gap: $spacing-4;
       margin-bottom: $spacing-8;
-
+  
       @media (max-width: $breakpoint-sm) {
         flex-direction: column;
         align-items: center;
+        
+        .btn {
+          width: 100%;
+          max-width: 420px;
+        }
       }
-
+  
       .btn {
+        position: relative;
         padding: $spacing-4 $spacing-6;
         border-radius: $border-radius-lg;
         font-weight: 600;
         text-decoration: none;
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
         border: none;
         cursor: pointer;
         font-size: $font-size-base;
         font-family: $font-family-primary;
+        overflow: hidden;
+        z-index: 1;
 
         &-primary {
-          background: $secondary;
+          background: transparent;
           color: $white;
+          border: 2px solid $secondary;
+
+          // Liquid fill background
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: $secondary;
+            transition: width 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+            z-index: -1;
+            border-radius: calc(#{$border-radius-lg} - 2px);
+          }
 
           &:hover {
-            background: darken($secondary, 10%);
+            color: $white;
             transform: translateY(-2px);
             box-shadow: $shadow-md;
+
+            &::before {
+              width: 100%;
+            }
+          }
+
+          // Shimmer effect
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba($white, 0.4), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+          }
+
+          &:hover::after {
+            left: 100%;
           }
         }
 
@@ -109,15 +153,49 @@
           background: transparent;
           color: $white;
           border: 2px solid $white;
+          position: relative;
+          overflow: hidden;
+
+          // Liquid fill background
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: $white;
+            transition: width 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+            z-index: -1;
+            border-radius: calc(#{$border-radius-lg} - 2px);
+          }
 
           &:hover {
-            background: $white;
             color: $primary;
-          }
-        }
+            transform: translateY(-2px);
+            box-shadow: $shadow-md;
 
-        &-animated {
-          animation: bounce 2s infinite;
+            &::before {
+              width: 100%;
+            }
+          }
+
+          // Shimmer effect
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba($primary, 0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+          }
+
+          &:hover::after {
+            left: 100%;
+          }
         }
       }
     }
@@ -159,10 +237,24 @@
         justify-content: center;
         align-items: center;
 
-        .main-image {
-          max-width: 100%;
+        .hero-logo {
+          max-width: 400px;
+          width: 100%;
           height: auto;
           border-radius: $border-radius-lg;
+          box-shadow: $shadow-lg;
+          background: $white;
+          padding: $spacing-6;
+          
+          @media (max-width: $breakpoint-md) {
+            max-width: 300px;
+            padding: $spacing-4;
+          }
+          
+          @media (max-width: $breakpoint-sm) {
+            max-width: 250px;
+            padding: $spacing-3;
+          }
         }
 
         .floating-element {
@@ -181,12 +273,22 @@
             top: 20%;
             left: 10%;
             animation-delay: 0s;
+            
+            @media (max-width: $breakpoint-md) {
+              top: 10%;
+              left: 5%;
+            }
           }
 
           &.floating-2 {
             bottom: 30%;
             right: 10%;
             animation-delay: 1.5s;
+            
+            @media (max-width: $breakpoint-md) {
+              bottom: 20%;
+              right: 5%;
+            }
           }
 
           .pill-icon,
@@ -718,18 +820,6 @@
   }
 }
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
-
 // Utility classes
 .container {
   max-width: $breakpoint-xl;
@@ -766,5 +856,13 @@
       transform: translateY(-2px);
       box-shadow: $shadow-md;
     }
+  }
+}
+
+// Mobile-specific hero tweaks
+@media (max-width: $breakpoint-sm) {
+  .homepage .hero {
+    min-height: auto;
+    padding: $spacing-7 0;
   }
 }

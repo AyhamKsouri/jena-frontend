@@ -1,25 +1,31 @@
-@import'../../../../assets/scss/abstracts/variables.scss';
+@import '../../../../assets/scss/abstracts/variables';
 
 .header {
-  width: 100%;
-  background-color: $background-primary;
-  box-shadow: $shadow-sm;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
-  transition: box-shadow 0.3s ease;
+  left: 0;
+  width: 100%;
+  padding: $spacing-4 $spacing-8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+  background: rgba(255, 255, 255, 0.95); // Light background for better readability
+  backdrop-filter: blur(10px);
+  box-shadow: $shadow-md;
+  transition: all 0.5s ease;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-3 $spacing-4;
+  }
 
   &__container {
-    max-width: $breakpoint-xl;
-    margin: 0 auto;
-    padding: $spacing-4;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
-    @media (max-width: $breakpoint-md) {
-      padding: $spacing-3 $spacing-4;
-    }
+    max-width: $breakpoint-xl;
+    margin: 0 auto;
   }
 
   &__logo {
@@ -27,18 +33,24 @@
     
     a {
       text-decoration: none;
-      color: $text-primary;
+      color: $primary; // Use primary color for text fallback
       display: flex;
       align-items: center;
+      font-size: 1.8em;
+      user-select: none;
+      transition: all 0.3s ease;
+      font-weight: 700;
     }
 
     .logo-image {
-      height: 40px;
+      height: 45px;
       width: auto;
       object-fit: contain;
+      // Remove the filter that was causing the yellow square
+      // filter: brightness(0) saturate(100%) invert(92%) sepia(39%) saturate(525%) hue-rotate(358deg) brightness(106%) contrast(101%);
       
       @media (max-width: $breakpoint-sm) {
-        height: 32px;
+        height: 35px;
       }
     }
   }
@@ -60,32 +72,41 @@
       margin: 0 $spacing-4;
 
       a {
-        text-decoration: none;
-        color: $text-primary;
-        font-weight: 500;
-        font-size: $font-size-base;
-        padding: $spacing-2 0;
         position: relative;
+        font-size: 1.1em;
+        color: $gray-800; // Dark text for better contrast on light background
+        text-decoration: none;
+        font-weight: 500;
+        padding: $spacing-2 0;
         transition: color 0.3s ease;
         white-space: nowrap;
 
-        &:hover, &.active {
-          color: $primary;
-
-          &:after {
-            width: 100%;
-          }
-        }
-
-        &:after {
+        // Pinkish hover animation
+        &::after {
           content: '';
           position: absolute;
-          bottom: 0;
           left: 0;
-          width: 0;
-          height: 2px;
-          background-color: $primary;
-          transition: width 0.3s ease;
+          bottom: -6px;
+          width: 100%;
+          height: 3px;
+          background: #ff6b9d; // Pink color
+          border-radius: 5px;
+          transform-origin: right;
+          transform: scaleX(0);
+          transition: transform 0.5s;
+        }
+
+        &:hover::after {
+          transform-origin: left;
+          transform: scaleX(1);
+        }
+
+        &:hover, &.active {
+          color: #d63384; // Pinkish color
+
+          &::after {
+            background: #d63384; // Matching pinkish color
+          }
         }
       }
     }
@@ -107,7 +128,7 @@
     cursor: pointer;
     position: relative;
     font-size: $font-size-xl;
-    color: $text-primary;
+    color: $gray-700; // Darker color for better contrast
     transition: all 0.3s ease;
     padding: $spacing-2;
     border-radius: $border-radius;
@@ -116,8 +137,9 @@
     justify-content: center;
 
     &:hover {
-      color: $primary;
-      background-color: $gray-50;
+      color: #d63384; // Pinkish color
+      transform: translateY(-2px);
+      background-color: rgba(214, 51, 132, 0.1); // Light pink background on hover
     }
     
     @media (max-width: $breakpoint-sm) {
@@ -132,7 +154,7 @@
     border: none;
     cursor: pointer;
     position: relative;
-    color: $text-primary;
+    color: $gray-700;
     transition: all 0.3s ease;
     padding: $spacing-2;
     border-radius: $border-radius;
@@ -142,8 +164,9 @@
     gap: $spacing-2;
 
     &:hover {
-      color: $primary;
-      background-color: $gray-50;
+      color: #d63384; // Pinkish color
+      transform: translateY(-2px);
+      background-color: rgba(214, 51, 132, 0.1);
     }
 
     .cart-icon-wrapper {
@@ -162,6 +185,7 @@
     .cart-text {
       font-size: $font-size-sm;
       font-weight: 500;
+      color: $gray-700;
       
       @media (max-width: $breakpoint-sm) {
         display: none;
@@ -172,7 +196,7 @@
       position: absolute;
       top: -4px;
       right: -4px;
-      background-color: $accent;
+      background-color: #d63384; // Pinkish color
       color: $white;
       border-radius: 50%;
       width: 18px;
@@ -199,26 +223,31 @@
     justify-content: center;
     align-items: center;
     gap: 4px;
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: $gray-50;
-    border-radius: $border-radius;
+    width: 45px;
+    height: 45px;
+    border: 2px solid $gray-600;
+    background: transparent;
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-left: $spacing-2;
+    transition: all 0.5s ease;
+    margin-left: $spacing-4;
 
     &:hover {
-      background: $gray-100;
+      background: #d63384; // Pinkish background
+      border-color: #d63384;
+      
+      .bar {
+        background: $white;
+      }
     }
 
     .bar {
       width: 20px;
-      height: 2px;
-      background: $text-primary;
+      height: 3px;
+      background: $gray-600;
       display: block;
       transition: all 0.3s ease;
-      border-radius: 1px;
+      border-radius: 5px;
     }
 
     @media (max-width: $breakpoint-md) {
@@ -226,9 +255,9 @@
     }
     
     @media (max-width: $breakpoint-sm) {
-      width: 36px;
-      height: 36px;
-      margin-left: $spacing-1;
+      width: 40px;
+      height: 40px;
+      margin-left: $spacing-2;
     }
   }
 
@@ -236,13 +265,14 @@
   &__mobile-nav {
     display: none;
     border-top: 1px solid $gray-200;
-    background: $background-primary;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    box-shadow: $shadow-md;
     animation: slideDown 0.3s ease;
+    box-shadow: $shadow-lg;
 
     @media (max-width: $breakpoint-md) {
       display: block;
@@ -263,46 +293,50 @@
         border-radius: $border-radius;
         transition: all 0.3s ease;
         font-size: $font-size-base;
-        color: $text-primary;
+        color: $gray-800;
+        border-left: 3px solid transparent;
+
+        &::after {
+          display: none;
+        }
 
         &:hover, &.active {
-          color: $primary;
-          background-color: $gray-50;
-
-          &:after {
-            display: none;
-          }
+          color: #d63384; // Pinkish color
+          background-color: rgba(214, 51, 132, 0.1);
+          transform: translateX(8px);
+          border-left-color: #d63384;
         }
       }
     }
   }
 
-  // Search bar (optional enhancement)
-  &__search {
-    display: flex;
-    align-items: center;
-    background: $gray-50;
-    border-radius: 20px;
-    padding: $spacing-2 $spacing-4;
-    margin: 0 $spacing-4;
-    flex: 1;
-    max-width: 400px;
+  // Login button
+  .login-btn {
+    width: 100px;
+    height: 45px;
+    background: transparent;
+    border: 2px solid #d63384; // Pinkish border
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #d63384; // Pinkish text
+    font-weight: 500;
+    margin-left: $spacing-6;
+    transition: all 0.5s ease;
 
-    @media (max-width: $breakpoint-md) {
-      display: none;
+    &:hover {
+      background: #d63384;
+      color: $white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(214, 51, 132, 0.3);
     }
 
-    input {
-      border: none;
-      background: none;
-      outline: none;
-      width: 100%;
-      font-size: $font-size-sm;
-      color: $text-primary;
-
-      &::placeholder {
-        color: $text-light;
-      }
+    @media (max-width: $breakpoint-sm) {
+      width: 80px;
+      height: 40px;
+      font-size: 1em;
+      margin-left: $spacing-4;
     }
   }
 }
@@ -322,8 +356,12 @@
 // Menu button animation when open
 .menu-open {
   .header__menu-btn {
+    background: #d63384;
+    border-color: #d63384;
+    
     .bar:nth-child(1) {
       transform: rotate(45deg) translate(6px, 6px);
+      background: $white;
     }
     
     .bar:nth-child(2) {
@@ -332,11 +370,49 @@
     
     .bar:nth-child(3) {
       transform: rotate(-45deg) translate(6px, -6px);
+      background: $white;
     }
   }
 }
 
-// Optional: Add transition for header on scroll
+// Scrolled state for header
 .header.scrolled {
-  box-shadow: $shadow-md;
+  background: rgba(255, 255, 255, 0.98);
+  padding: $spacing-3 $spacing-8;
+  box-shadow: $shadow-lg;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-2 $spacing-4;
+  }
+}
+
+// Ensure the header works with your top-page background
+:host {
+  display: block;
+  position: relative;
+  z-index: 99;
+}
+
+// Mobile-specific header tweaks
+@media (max-width: $breakpoint-sm) {
+  .header {
+    padding: $spacing-2 $spacing-3;
+  }
+
+  .header__actions {
+    gap: $spacing-1;
+  }
+
+  .header__action-btn {
+    display: none;
+  }
+
+  .header__cart-btn {
+    display: flex;
+    padding: $spacing-2;
+  }
+
+  .login-btn {
+    display: none;
+  }
 }
