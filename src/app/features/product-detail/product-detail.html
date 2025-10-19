@@ -1,0 +1,18 @@
+<section class="product-detail">
+  <div class="container">
+    <a routerLink="/products" class="back-link"><i class="fas fa-arrow-left"></i> Retour aux produits</a>
+
+    <div class="detail-card">
+      <div class="detail-card__image">
+        <img [src]="'https://placehold.co/800x800?text=Produit+' + id" [alt]="'Produit ' + id" />
+      </div>
+      <div class="detail-card__content">
+        <h1 class="detail-card__title">Produit {{ id }}</h1>
+        <p class="detail-card__desc">Ceci est une page de détail placeholder pour le produit {{ id }}.</p>
+        <div class="detail-card__actions">
+          <a class="btn" routerLink="/cart">Voir le Panier</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

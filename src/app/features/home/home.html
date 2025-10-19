@@ -2,16 +2,35 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-text">
+      <div class="hero-text animate-fade-in">
+        <span class="hero-badge">Nouvelle Collection</span>
         <h1 class="hero-title">Votre Santé, Notre Priorité</h1>
         <p class="hero-subtitle">Découvrez une large gamme de produits de parapharmacie pour toute la famille. Qualité, confiance et conseils experts.</p>
         <div class="hero-actions">
-          <button class="btn btn-primary" routerLink="/shop">Acheter Maintenant</button>
-          <button class="btn btn-secondary">Nos Promotions</button>
+          <button class="btn btn-primary btn-animated" routerLink="/shop">Acheter Maintenant</button>
+          <button class="btn btn-outline btn-animated">Nos Promotions</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">5000+</span>
+            <span class="stat-label">Produits</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">10k+</span>
+            <span class="stat-label">Clients Satisfaits</span>
+          </div>
         </div>
       </div>
-      <div class="hero-image">
-        <div class="placeholder-image">Image Hero</div>
+      <div class="hero-image animate-slide-in">
+        <div class="hero-image-container">
+          <img src="assets/images/hero-image.svg" alt="Jena Parapharmacie" class="main-image">
+          <div class="floating-element floating-1">
+            <div class="pill-icon">💊</div>
+          </div>
+          <div class="floating-element floating-2">
+            <div class="heart-icon">❤️</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -116,4 +135,146 @@
       </div>
     </div>
   </section>
+
+  <!-- Featured Products -->
+  <section class="products">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Produits Populaires</h2>
+        <a class="view-all" routerLink="/products">Voir tout</a>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://placehold.co/300x300?text=Produit+1" alt="Produit 1">
+            <span class="product-badge">-20%</span>
+          </div>
+          <h3 class="product-title">Crème Hydratante</h3>
+          <p class="product-desc">Hydratation intense pour tous types de peau.</p>
+          <div class="product-price">
+            <span class="current">39,90 DT</span>
+            <span class="original">49,90 DT</span>
+          </div>
+          <button class="add-to-cart">Ajouter au Panier</button>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://placehold.co/300x300?text=Produit+2" alt="Produit 2">
+          </div>
+          <h3 class="product-title">Sérum Vitamine C</h3>
+          <p class="product-desc">Éclat et uniformité du teint.</p>
+          <div class="product-price">
+            <span class="current">59,90 DT</span>
+          </div>
+          <button class="add-to-cart">Ajouter au Panier</button>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://placehold.co/300x300?text=Produit+3" alt="Produit 3">
+          </div>
+          <h3 class="product-title">Shampooing Doux</h3>
+          <p class="product-desc">Pour des cheveux forts et brillants.</p>
+          <div class="product-price">
+            <span class="current">24,90 DT</span>
+          </div>
+          <button class="add-to-cart">Ajouter au Panier</button>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://placehold.co/300x300?text=Produit+4" alt="Produit 4">
+            <span class="product-badge">Nouveau</span>
+          </div>
+          <h3 class="product-title">Gel Nettoyant</h3>
+          <p class="product-desc">Nettoyage en douceur, sans dessécher.</p>
+          <div class="product-price">
+            <span class="current">29,90 DT</span>
+          </div>
+          <button class="add-to-cart">Ajouter au Panier</button>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://placehold.co/300x300?text=Produit+5" alt="Produit 5">
+          </div>
+          <h3 class="product-title">Crème Solaire SPF50</h3>
+          <p class="product-desc">Protection maximale contre les UV.</p>
+          <div class="product-price">
+            <span class="current">34,90 DT</span>
+          </div>
+          <button class="add-to-cart">Ajouter au Panier</button>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://placehold.co/300x300?text=Produit+6" alt="Produit 6">
+          </div>
+          <h3 class="product-title">Huile Capillaire</h3>
+          <p class="product-desc">Répare et nourrit en profondeur.</p>
+          <div class="product-price">
+            <span class="current">27,90 DT</span>
+          </div>
+          <button class="add-to-cart">Ajouter au Panier</button>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://placehold.co/300x300?text=Produit+7" alt="Produit 7">
+          </div>
+          <h3 class="product-title">Crème Mains</h3>
+          <p class="product-desc">Hydrate et protège les mains.</p>
+          <div class="product-price">
+            <span class="current">19,90 DT</span>
+          </div>
+          <button class="add-to-cart">Ajouter au Panier</button>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://placehold.co/300x300?text=Produit+8" alt="Produit 8">
+          </div>
+          <h3 class="product-title">Brosse à Dents</h3>
+          <p class="product-desc">Soins d'hygiène bucco-dentaire.</p>
+          <div class="product-price">
+            <span class="current">12,90 DT</span>
+          </div>
+          <button class="add-to-cart">Ajouter au Panier</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">Ce que disent nos clients</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Service impeccable et produits de qualité. Je recommande vivement!"</p>
+          <span class="author">— Amine</span>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Livraison rapide et bien emballée. Super expérience!"</p>
+          <span class="author">— Sara</span>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★☆</div>
+          <p>"Très bons conseils, prix compétitifs. Je suis satisfait."</p>
+          <span class="author">— Hichem</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-inner">
+        <h2>Recevez nos offres exclusives</h2>
+        <p>Inscrivez-vous à notre newsletter pour ne rien rater.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Votre email" aria-label="Email">
+          <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
 </section>

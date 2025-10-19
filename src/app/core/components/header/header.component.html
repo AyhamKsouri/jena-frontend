@@ -2,7 +2,7 @@
   <div class="header__container">
     <div class="header__logo">
       <a routerLink="/">
-        <h1>JENA</h1>
+        <img src="assets/images/jena_logo.jpeg" alt="JENA Logo" class="logo-image">
       </a>
     </div>
     
@@ -11,23 +11,46 @@
         @for (item of navItems; track item.label) {
           <li class="header__nav-item">
             <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">{{ item.label }}</a>
-              {{ item.label }}
           </li>
         }
       </ul>
     </nav>
+
+    <button class="header__menu-btn" (click)="menuOpen = !menuOpen" aria-label="Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
     
     <div class="header__actions">
       <button class="header__action-btn" aria-label="Search">
         <i class="fas fa-search"></i>
       </button>
-      <button class="header__action-btn" aria-label="Shopping Cart" routerLink="/cart">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="header__cart-count">0</span>
+      
+      <!-- Improved Cart Button -->
+      <button class="header__cart-btn" aria-label="Shopping Cart" routerLink="/cart">
+        <div class="cart-icon-wrapper">
+          <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5.5M7 13l2.5 5.5m0 0L17 21m-7.5-2.5L12 14m0 0h5"/>
+          </svg>
+        </div>
+        <span class="cart-text">Cart</span>
       </button>
+      
       <button class="header__action-btn" aria-label="User Account">
         <i class="fas fa-user"></i>
       </button>
     </div>
   </div>
+
+  <!-- Mobile Nav -->
+  <nav class="header__mobile-nav" *ngIf="menuOpen">
+    <ul class="header__nav-list">
+      @for (item of navItems; track item.label) {
+        <li class="header__nav-item">
+          <a (click)="menuOpen=false" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">{{ item.label }}</a>
+        </li>
+      }
+    </ul>
+  </nav>
 </header>

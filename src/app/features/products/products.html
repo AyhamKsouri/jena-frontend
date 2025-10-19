@@ -1,0 +1,48 @@
+<section class="products-page">
+  <div class="container">
+    <div class="page-header">
+      <h1>Produits</h1>
+      <p>Parcourez nos produits et trouvez ce qui vous convient.</p>
+    </div>
+
+    <div class="filters">
+      <div class="filters__group">
+        <label for="search">Recherche</label>
+        <input id="search" type="text" [(ngModel)]="searchTerm" (input)="applyFilters()" placeholder="Rechercher un produit..." />
+      </div>
+
+      <div class="filters__group">
+        <label for="category">Catégorie</label>
+        <select id="category" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+          <option value="all">Toutes</option>
+          @for (cat of categories; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="filters__group">
+        <label for="sort">Trier</label>
+        <select id="sort" [(ngModel)]="sortKey" (change)="applyFilters()">
+          <option value="relevance">Pertinence</option>
+          <option value="priceLow">Prix: bas à haut</option>
+          <option value="priceHigh">Prix: haut à bas</option>
+          <option value="newest">Nouveautés</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid" *ngIf="filteredProducts.length > 0; else noResults">
+      @for (product of filteredProducts; track product.id) {
+        <app-product-card [product]="product" (addToCart)="onAddToCart($event)"></app-product-card>
+      }
+    </div>
+
+    <ng-template #noResults>
+      <div class="no-results">
+        <i class="fas fa-search"></i>
+        <p>Aucun produit ne correspond à votre recherche.</p>
+      </div>
+    </ng-template>
+  </div>
+</section>
