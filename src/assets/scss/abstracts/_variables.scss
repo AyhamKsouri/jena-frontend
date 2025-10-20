@@ -9,7 +9,9 @@ $primary-light: #58d68d;
 
 // Secondary Colors (Blue as requested)
 $secondary: #3498db;      // Blue for secondary actions
-$accent: #a8e6cf;         // Mint for accents
+$accent: #a8e6cf;
+$accent-dark: #DB2777;
+         // Mint for accents
 
 // Accent Colors (Mint, Pink, Brown as requested)
 $mint: #a8e6cf;
@@ -42,6 +44,20 @@ $text-primary: $gray-900;
 $text-secondary: $gray-600;
 $text-light: $gray-500;
 
+// ADD THESE MISSING VARIABLES:
+// Border Colors
+$border-color: $gray-200;
+$border-color-light: $gray-100;
+
+// Additional radius
+$border-radius-full: 9999px;
+
+// Additional shadow
+$shadow-xs: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+// Font size for medium
+$font-size-md: 0.9375rem; // 15px
+
 // =============================================================================
 // Typography Scale
 // =============================================================================
@@ -72,6 +88,8 @@ $spacing-7: 2.5rem;   // 40px
 $spacing-8: 3rem;     // 48px
 $spacing-9: 4rem;     // 64px
 $spacing-10: 5rem;    // 80px
+$spacing-12: 3rem;
+
 
 // =============================================================================
 // Breakpoints
@@ -96,3 +114,4 @@ $border-radius-lg: 0.75rem;
 $shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 $shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);

@@ -866,3 +866,65 @@
     padding: $spacing-7 0;
   }
 }
+
+.hot-deal {
+  padding: $spacing-8 0;
+  background: $background-secondary;
+
+  .hot-deal__header {
+    text-align: center;
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, $accent, darken($accent, 8%));
+      color: $white;
+      padding: $spacing-1 $spacing-3;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: $font-size-sm;
+    }
+    .title {
+      margin-top: $spacing-3;
+      font-size: $font-size-3xl;
+      color: $text-primary;
+      font-weight: 700;
+    }
+  }
+
+  .hot-deal__countdown {
+    margin-top: $spacing-5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-3;
+
+    .cd-item {
+      background: $white;
+      border-radius: $border-radius-lg;
+      padding: $spacing-3 $spacing-4;
+      box-shadow: $shadow-sm;
+      text-align: center;
+      min-width: 90px;
+
+      .cd-number {
+        display: block;
+        font-size: $font-size-3xl;
+        font-weight: 700;
+        color: $text-primary;
+        line-height: 1;
+      }
+      .cd-label {
+        display: block;
+        margin-top: $spacing-1;
+        font-size: $font-size-xs;
+        color: $text-secondary;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+    }
+
+    .cd-sep {
+      font-weight: 700;
+      color: $text-light;
+    }
+  }
+}

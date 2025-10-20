@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 import { CartService } from '../../core/services/cart.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface Product {
   id: string;
@@ -15,6 +16,7 @@ interface Product {
   imageUrl: string;
   isPopular?: boolean;
   rating?: number;
+  reviewCount?: number;
 }
 
 interface Category {
@@ -30,7 +32,7 @@ interface Category {
   styleUrls: ['./products.scss']
 })
 export class Products implements OnInit {
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private route: ActivatedRoute) {}
 
   // Enhanced product data with more categories and properties
   products: Product[] = [
@@ -44,6 +46,7 @@ export class Products implements OnInit {
       isNew: false,
       isPopular: true,
       rating: 4.5,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Crème+Visage'
     },
     {
@@ -56,6 +59,7 @@ export class Products implements OnInit {
       isNew: true,
       isPopular: false,
       rating: 4.8,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Sérum+Vitamine+C'
     },
     {
@@ -68,6 +72,7 @@ export class Products implements OnInit {
       isNew: false,
       isPopular: true,
       rating: 4.3,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Shampooing+Doux'
     },
     {
@@ -80,6 +85,7 @@ export class Products implements OnInit {
       isNew: true,
       isPopular: false,
       rating: 4.6,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Gel+Nettoyant'
     },
     {
@@ -92,6 +98,7 @@ export class Products implements OnInit {
       isNew: false,
       isPopular: true,
       rating: 4.7,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Crème+Solaire'
     },
     {
@@ -104,6 +111,7 @@ export class Products implements OnInit {
       isNew: false,
       isPopular: false,
       rating: 4.2,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Après-Shampooing'
     },
     {
@@ -116,6 +124,7 @@ export class Products implements OnInit {
       isNew: false,
       isPopular: true,
       rating: 4.9,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Brosse+Électrique'
     },
     {
@@ -128,6 +137,7 @@ export class Products implements OnInit {
       isNew: false,
       isPopular: false,
       rating: 4.4,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Dentifrice+Blanchissant'
     },
     {
@@ -140,6 +150,7 @@ export class Products implements OnInit {
       isNew: true,
       isPopular: false,
       rating: 4.1,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Huile+Lavande'
     },
     {
@@ -152,6 +163,7 @@ export class Products implements OnInit {
       isNew: false,
       isPopular: true,
       rating: 4.6,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Vitamines+B'
     },
     {
@@ -164,6 +176,7 @@ export class Products implements OnInit {
       isNew: false,
       isPopular: false,
       rating: 4.3,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Crème+Mains'
     },
     {
@@ -176,6 +189,7 @@ export class Products implements OnInit {
       isNew: true,
       isPopular: false,
       rating: 4.0,
+      reviewCount: 128,
       imageUrl: 'https://placehold.co/600x600?text=Anti-Moustiques'
     }
   ];
@@ -197,7 +211,30 @@ export class Products implements OnInit {
 
   ngOnInit(): void {
     this.initializeCategories();
-    this.applyFilters();
+
+    // Apply filters from query params (e.g., category=visage)
+    this.route.queryParamMap.subscribe(params => {
+      const key = params.get('category');
+      const mapped = this.mapCategoryKey(key);
+      if (mapped) {
+        this.selectedCategory = mapped;
+      } else {
+        this.selectedCategory = 'all';
+      }
+      this.applyFilters();
+    });
+  }
+
+  private mapCategoryKey(key: string | null): string | null {
+    if (!key) return null;
+    const map: Record<string, string> = {
+      visage: 'Soins Visage',
+      cheveux: 'Soins Cheveux',
+      coffrets: 'Compléments Alimentaires',
+      'trousseaux-bebe': 'Hygiène Bucco-Dentaire'
+    };
+    const value = map[key.toLowerCase()] || null;
+    return value && this.categories.includes(value) ? value : value;
   }
 
   private initializeCategories(): void {

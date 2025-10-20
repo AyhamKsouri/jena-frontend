@@ -43,7 +43,7 @@
     <div class="cart__summary">
       <div class="cart__summary-row">
         <span>Sous-total :</span>
-        <span>{{ cartService.cart().totalPrice | currency }}</span>
+        <span>{{ cartService.cart().totalPrice | currency:'TND':'symbol' }}</span>
       </div>
       <div class="cart__summary-row">
         <span>Livraison :</span>
@@ -51,7 +51,7 @@
       </div>
       <div class="cart__summary-row cart__summary-total">
         <span>Total :</span>
-        <span>{{ cartService.cart().totalPrice | currency }}</span>
+        <span>{{ cartService.cart().totalPrice | currency:'TND':'symbol' }}</span>
       </div>
       
       <button class="cart__checkout-btn">

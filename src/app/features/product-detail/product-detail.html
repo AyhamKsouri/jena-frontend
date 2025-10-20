@@ -1,18 +1,136 @@
 <section class="product-detail">
   <div class="container">
-    <a routerLink="/products" class="back-link"><i class="fas fa-arrow-left"></i> Retour aux produits</a>
+    <a routerLink="/products" class="back-link">
+      <i class="fas fa-arrow-left"></i>
+      Retour aux produits
+    </a>
 
-    <div class="detail-card">
+    <div class="detail-card" *ngIf="product; else loading">
       <div class="detail-card__image">
-        <img [src]="'https://placehold.co/800x800?text=Produit+' + id" [alt]="'Produit ' + id" />
+        <div class="image-badge" *ngIf="product.isNew">Nouveau</div>
+        <div class="image-badge image-badge--discount" *ngIf="product.discount">
+          -{{ product.discount }}%
+        </div>
+        <img [src]="product.imageUrl" [alt]="product.name" />
       </div>
+      
       <div class="detail-card__content">
-        <h1 class="detail-card__title">Produit {{ id }}</h1>
-        <p class="detail-card__desc">Ceci est une page de détail placeholder pour le produit {{ id }}.</p>
+        <div class="detail-card__header">
+          <span class="detail-card__category">{{ product.category }}</span>
+          <h1 class="detail-card__title">{{ product.name }}</h1>
+          <p class="detail-card__brand">{{ product.brand }} • {{ product.sku }}</p>
+          
+          <div class="detail-card__rating">
+            <div class="stars">
+              <!-- Full stars -->
+              <i class="fas fa-star" *ngFor="let star of getStars(product.rating).fullStars"></i>
+              <!-- Half star -->
+              <i class="fas fa-star-half-alt" *ngIf="getStars(product.rating).hasHalfStar"></i>
+              <!-- Empty stars -->
+              <i class="far fa-star" *ngFor="let star of getStars(product.rating).emptyStars"></i>
+            </div>
+            <span class="rating-text">{{ product.rating }} ({{ product.reviewCount }} avis)</span>
+          </div>
+
+          <div class="detail-card__price">
+            <span class="current-price">{{ formatPrice(product.price) }}</span>
+            <span class="original-price" *ngIf="product.originalPrice">
+              {{ formatPrice(product.originalPrice) }}
+            </span>
+            <span class="discount" *ngIf="product.discount">
+              -{{ product.discount }}%
+            </span>
+          </div>
+        </div>
+
+        <p class="detail-card__description">
+          {{ product.description }}
+        </p>
+
+        <div class="detail-card__features">
+          <div class="feature" *ngFor="let feature of product.features">
+            <i class="fas fa-check"></i>
+            <span>{{ feature }}</span>
+          </div>
+        </div>
+
         <div class="detail-card__actions">
-          <a class="btn" routerLink="/cart">Voir le Panier</a>
+          <div class="quantity-selector">
+            <label>Quantité:</label>
+            <div class="quantity-controls">
+              <button (click)="decreaseQuantity()" [disabled]="quantity === 1">
+                <i class="fas fa-minus"></i>
+              </button>
+              <span class="quantity">{{ quantity }}</span>
+              <button (click)="increaseQuantity()">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="stock-status" [class.in-stock]="product.inStock" [class.out-of-stock]="!product.inStock">
+            <i class="fas" [class.fa-check-circle]="product.inStock" [class.fa-times-circle]="!product.inStock"></i>
+            {{ product.inStock ? 'En stock' : 'Rupture de stock' }}
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn btn--primary" (click)="addToCart()" [disabled]="!product.inStock">
+              <i class="fas fa-shopping-cart"></i>
+              Ajouter au panier
+            </button>
+            <button class="btn btn--secondary">
+              <i class="fas fa-heart"></i>
+              Favoris
+            </button>
+            <a class="btn btn--accent" routerLink="/cart" [class.disabled]="!product.inStock">
+              <i class="fas fa-bolt"></i>
+              Acheter maintenant
+            </a>
+          </div>
+        </div>
+
+        <div class="detail-card__meta">
+          <div class="meta-item">
+            <i class="fas fa-shipping-fast"></i>
+            <span class="meta-label">Livraison</span>
+            <span class="meta-value">24-48h</span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-undo"></i>
+            <span class="meta-label">Retour</span>
+            <span class="meta-value">30 jours</span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-shield-alt"></i>
+            <span class="meta-label">Garantie</span>
+            <span class="meta-value">2 ans</span>
+          </div>
         </div>
       </div>
     </div>
+
+    <ng-template #loading>
+      <div class="detail-card loading-skeleton">
+        <div class="detail-card__image"></div>
+        <div class="detail-card__content">
+          <div class="detail-card__title"></div>
+          <div class="detail-card__desc"></div>
+          <div class="detail-card__price"></div>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- Related Products Section -->
+    <div class="related-products">
+      <h2 class="related-products__title">Produits similaires</h2>
+      <div class="products-grid">
+        <!-- Related products would go here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Cart Button for Mobile -->
+  <div class="floating-cart" (click)="scrollToActions()">
+    <i class="fas fa-shopping-cart"></i>
   </div>
 </section>

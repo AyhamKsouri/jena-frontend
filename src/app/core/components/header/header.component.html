@@ -10,7 +10,7 @@
       <ul class="header__nav-list">
         @for (item of navItems; track item.label) {
           <li class="header__nav-item">
-            <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">{{ item.label }}</a>
+            <a [routerLink]="item.path" [queryParams]="item.queryParams || null" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">{{ item.label }}</a>
           </li>
         }
       </ul>
@@ -48,7 +48,7 @@
     <ul class="header__nav-list">
       @for (item of navItems; track item.label) {
         <li class="header__nav-item">
-          <a (click)="menuOpen=false" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">{{ item.label }}</a>
+          <a (click)="menuOpen=false" [routerLink]="item.path" [queryParams]="item.queryParams || null" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">{{ item.label }}</a>
         </li>
       }
     </ul>

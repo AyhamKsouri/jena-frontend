@@ -14,9 +14,11 @@ export class HeaderComponent {
 
   navItems = [
     { label: 'Accueil', path: '/' },
+    { label: 'Visage', path: '/products', queryParams: { category: 'visage' } },
+    { label: 'Cheveux', path: '/products', queryParams: { category: 'cheveux' } },
+    { label: 'Coffrets', path: '/products', queryParams: { category: 'coffrets' } },
+    { label: 'Trousseaux Bébé', path: '/products', queryParams: { category: 'trousseaux-bebe' } },
     { label: 'Produits', path: '/products' },
-    { label: 'À propos', path: '/about' },
-    { label: 'Contact', path: '/contact' },
-    { label: 'Blog', path: '/blog' }
+    { label: 'À propos', path: '/about' }
   ];
 }

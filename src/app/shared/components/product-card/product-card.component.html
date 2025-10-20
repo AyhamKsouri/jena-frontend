@@ -1,25 +1,44 @@
 <div class="product-card" *ngIf="product">
+  <!-- Add router link wrapper around the clickable content -->
   <a [routerLink]="['/products', product.id]" class="product-card__link">
     <div class="product-card__image-container">
       <img [src]="product.imageUrl" [alt]="product.name" class="product-card__image">
-      <div class="product-card__badges" *ngIf="product.isNew || product.discount">
-        <span class="product-card__badge product-card__badge--new" *ngIf="product.isNew">New</span>
-        <span class="product-card__badge product-card__badge--sale" *ngIf="product.discount">-{{product.discount}}%</span>
+      <div class="product-card__overlay">
+        <button class="product-card__wishlist" (click)="$event.preventDefault(); $event.stopPropagation()">
+          <i class="far fa-heart"></i>
+        </button>
+      </div>
+      <div class="product-card__badges">
+        <span class="badge badge--new" *ngIf="product.isNew">Nouveau</span>
+        <span class="badge badge--sale" *ngIf="product.discount">-{{product.discount}}%</span>
       </div>
     </div>
     
     <div class="product-card__content">
+      <span class="product-card__category">{{product.category}}</span>
       <h3 class="product-card__title">{{product.name}}</h3>
-      <p class="product-card__category">{{product.category}}</p>
+      
+      <div class="product-card__rating" *ngIf="product.rating">
+        <div class="stars">
+          <i class="fas fa-star" *ngFor="let star of getStars(product.rating).fullStars"></i>
+          <i class="fas fa-star-half-alt" *ngIf="getStars(product.rating).hasHalfStar"></i>
+          <i class="far fa-star" *ngFor="let star of getStars(product.rating).emptyStars"></i>
+        </div>
+        <span class="rating-count">({{product.reviewCount || '0'}})</span>
+      </div>
       
       <div class="product-card__price">
-        <span class="product-card__current-price">{{product.price | currency}}</span>
-        <span class="product-card__original-price" *ngIf="product.originalPrice">{{product.originalPrice | currency}}</span>
+        <span class="current-price">{{ product.price | currency:'TND':'symbol' }}</span>
+        <span class="original-price" *ngIf="product.originalPrice">
+          {{ product.originalPrice | currency:'TND':'symbol' }}
+        </span>
       </div>
     </div>
   </a>
   
-  <button class="product-card__add-to-cart" (click)="addProductToCart($event)">
-    Add to Cart
+  <!-- Keep add to cart button outside the link so it doesn't trigger navigation -->
+  <button class="product-card__add-btn" (click)="addProductToCart($event)">
+    <i class="fas fa-shopping-cart"></i>
+    Ajouter au panier
   </button>
 </div>

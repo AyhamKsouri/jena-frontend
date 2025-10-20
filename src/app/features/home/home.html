@@ -7,7 +7,7 @@
         <h1 class="hero-title">Votre Santé, Notre Priorité</h1>
         <p class="hero-subtitle">Découvrez une large gamme de produits de parapharmacie pour toute la famille. Qualité, confiance et conseils experts.</p>
         <div class="hero-actions">
-          <button class="btn btn-primary btn-animated" routerLink="/shop">Acheter Maintenant</button>
+          <button class="btn btn-primary btn-animated" routerLink="/products">Acheter Maintenant</button>
           <button class="btn btn-outline btn-animated">Nos Promotions</button>
         </div>
         <div class="hero-stats">
@@ -69,33 +69,33 @@
     <div class="container">
       <h2 class="section-title">Nos Catégories</h2>
       <div class="categories-grid">
-        <div class="category-card" routerLink="/shop" [queryParams]="{category: 'bebe'}">
+        <div class="category-card" routerLink="/products" [queryParams]="{category: 'visage'}">
           <div class="category-image">
-            <div class="placeholder-image">Bébé & Maman</div>
+            <div class="placeholder-image">Visage</div>
           </div>
-          <h3>Bébé & Maman</h3>
-          <p>Soins et produits essentiels</p>
+          <h3>Visage</h3>
+          <p>Nettoyants, sérums et crèmes pour le visage</p>
         </div>
-        <div class="category-card" routerLink="/shop" [queryParams]="{category: 'beaute'}">
+        <div class="category-card" routerLink="/products" [queryParams]="{category: 'cheveux'}">
           <div class="category-image">
-            <div class="placeholder-image">Beauté & Soins</div>
+            <div class="placeholder-image">Cheveux</div>
           </div>
-          <h3>Beauté & Soins</h3>
-          <p>Cosmétiques et produits de beauté</p>
+          <h3>Cheveux</h3>
+          <p>Shampoings, soins et traitements capillaires</p>
         </div>
-        <div class="category-card" routerLink="/shop" [queryParams]="{category: 'hygiene'}">
+        <div class="category-card" routerLink="/products" [queryParams]="{category: 'coffrets'}">
           <div class="category-image">
-            <div class="placeholder-image">Hygiène</div>
+            <div class="placeholder-image">Nos coffrets</div>
           </div>
-          <h3>Hygiène</h3>
-          <p>Produits d'hygiène quotidienne</p>
+          <h3>Nos coffrets</h3>
+          <p>Box et coffrets promotionnels</p>
         </div>
-        <div class="category-card" routerLink="/shop" [queryParams]="{category: 'sante'}">
+        <div class="category-card" routerLink="/products" [queryParams]="{category: 'trousseaux-bebe'}">
           <div class="category-image">
-            <div class="placeholder-image">Santé & Bien-être</div>
+            <div class="placeholder-image">Trousseaux Bébé</div>
           </div>
-          <h3>Santé & Bien-être</h3>
-          <p>Compléments et produits naturels</p>
+          <h3>Trousseaux Bébé</h3>
+          <p>Essentiels et kits naissance</p>
         </div>
       </div>
     </div>
@@ -107,7 +107,38 @@
       <div class="promo-content">
         <h2>Première Commande?</h2>
         <p>Obtenez 10% de réduction avec le code: <strong>BIENVENUE10</strong></p>
-        <button class="btn btn-white" routerLink="/shop">Profiter de l'offre</button>
+        <button class="btn btn-white" routerLink="/products">Profiter de l'offre</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hot Deal Countdown -->
+  <section class="hot-deal">
+    <div class="container">
+      <div class="hot-deal__header">
+        <span class="badge">Hot deal</span>
+        <h2 class="title">Promotions limitées</h2>
+      </div>
+      <div class="hot-deal__countdown">
+        <div class="cd-item">
+          <span class="cd-number">{{ countdown.days | number:'2.0-0' }}</span>
+          <span class="cd-label">jours</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-item">
+          <span class="cd-number">{{ countdown.hours | number:'2.0-0' }}</span>
+          <span class="cd-label">heures</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-item">
+          <span class="cd-number">{{ countdown.minutes | number:'2.0-0' }}</span>
+          <span class="cd-label">min</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-item">
+          <span class="cd-number">{{ countdown.seconds | number:'2.0-0' }}</span>
+          <span class="cd-label">sec</span>
+        </div>
       </div>
     </div>
   </section>
