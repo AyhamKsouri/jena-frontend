@@ -1,76 +1,211 @@
 <div class="cart">
+  <!-- Header Section -->
   <div class="cart__header">
-    <h2 class="cart__title">Votre panier</h2>
+    <div class="cart__header-content">
+      <h1 class="cart__title">Votre Panier</h1>
+      <p class="cart__subtitle">Revoyez vos articles et passez à la caisse</p>
+    </div>
+    
     <button *ngIf="(cartService.cart().items?.length || 0) > 0" 
             class="cart__clear-btn" 
             (click)="clearCart()">
+      <i class="fas fa-trash"></i>
       Vider le panier
     </button>
   </div>
 
+  <!-- Main Cart Content -->
   <div class="cart__content" *ngIf="(cartService.cart().items?.length || 0) > 0; else emptyCart">
-    <div class="cart__items">
-      <div class="cart__item" *ngFor="let item of cartService.cart().items">
-        <div class="cart__item-image">
-          <img [src]="item.imageUrl" [alt]="item.name">
+    <div class="cart__main">
+      <!-- Cart Items Section -->
+      <div class="cart__items-section">
+        <div class="cart__items-header">
+          <h2 class="cart__section-title">Articles ({{ cartService.cart().totalItems }})</h2>
+          <span class="cart__items-count">{{ cartService.cart().totalItems }} article(s)</span>
         </div>
         
-        <div class="cart__item-details">
-          <h3 class="cart__item-name">{{ item.name }}</h3>
-          <p class="cart__item-category" *ngIf="item.category">{{ item.category }}</p>
+        <div class="cart__items">
+          <div class="cart__item" *ngFor="let item of cartService.cart().items">
+            <!-- Clickable Image Area -->
+            <div class="cart__item-image" (click)="goToProduct(item.id)">
+              <img [src]="item.imageUrl" [alt]="item.name" class="product-image">
+              <div class="cart__item-overlay">
+                <i class="fas fa-eye"></i>
+                <span>Voir le produit</span>
+              </div>
+            </div>
+            
+            <!-- Clickable Details Area -->
+            <div class="cart__item-details" (click)="goToProduct(item.id)">
+              <h3 class="cart__item-name">{{ item.name }}</h3>
+              <p class="cart__item-category" *ngIf="item.category">{{ item.category }}</p>
+              <div class="cart__item-meta">
+                <span class="cart__item-sku">Ref: {{ item.id }}</span>
+                <span class="cart__item-stock in-stock">En stock</span>
+              </div>
+            </div>
+            
+            <!-- Price (not clickable) -->
+            <div class="cart__item-price">
+              <span class="price-amount">{{ item.price | currency:'TND':'symbol':'1.2-2' }}</span>
+              <span class="price-unit">/unité</span>
+            </div>
+            
+            <!-- Quantity Controls (not clickable for navigation) -->
+            <div class="cart__item-quantity">
+              <div class="quantity-controls">
+                <button class="quantity-btn" 
+                        (click)="updateQuantity(item, -1)"
+                        [disabled]="item.quantity <= 1">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <span class="quantity-value">{{ item.quantity }}</span>
+                <button class="quantity-btn" 
+                        (click)="updateQuantity(item, 1)">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <button class="cart__item-save">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+            
+            <!-- Total (not clickable) -->
+            <div class="cart__item-total">
+              <span class="total-label">Total</span>
+              <span class="total-amount">{{ item.price * item.quantity | currency:'TND':'symbol':'1.2-2' }}</span>
+            </div>
+            
+            <!-- Remove Button (not clickable for navigation) -->
+            <button class="cart__item-remove" 
+                    (click)="removeItem(item.id)">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
         </div>
-        
-        <div class="cart__item-price">
-          {{ item.price | currency }}
+      </div>
+
+      <!-- Order Summary Section -->
+      <div class="cart__summary-section">
+        <div class="cart__summary-card">
+          <h3 class="cart__summary-title">Résumé de la commande</h3>
+          
+          <div class="cart__summary-details">
+            <div class="summary-row">
+              <span>Sous-total ({{ cartService.cart().totalItems }} article(s))</span>
+              <span>{{ cartService.cart().totalPrice | currency:'TND':'symbol':'1.2-2' }}</span>
+            </div>
+            
+            <div class="summary-row">
+              <span>Livraison</span>
+              <span class="free-shipping">Gratuite</span>
+            </div>
+            
+            <div class="summary-row discount">
+              <span>Économies</span>
+              <span class="discount-amount">-0,00 DT</span>
+            </div>
+            
+            <div class="summary-divider"></div>
+            
+            <div class="summary-row total">
+              <span>Total TTC</span>
+              <span class="total-price">{{ cartService.cart().totalPrice | currency:'TND':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+
+          <div class="cart__benefits">
+            <div class="benefit-item">
+              <i class="fas fa-shipping-fast"></i>
+              <span>Livraison gratuite dès 100 DT</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-shield-alt"></i>
+              <span>Paiement sécurisé</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-undo"></i>
+              <span>Retours sous 30 jours</span>
+            </div>
+          </div>
+
+          <button class="checkout-btn">
+            <i class="fas fa-lock"></i>
+            Passer au paiement
+          </button>
+          
+          <a routerLink="/products" class="continue-shopping">
+            <i class="fas fa-arrow-left"></i>
+            Continuer vos achats
+          </a>
         </div>
-        
-        <div class="cart__item-quantity">
-          <button class="cart__quantity-btn" (click)="updateQuantity(item, -1)">-</button>
-          <span class="cart__quantity-value">{{ item.quantity }}</span>
-          <button class="cart__quantity-btn" (click)="updateQuantity(item, 1)">+</button>
-        </div>
-        
-        <div class="cart__item-total">
-          {{ item.price * item.quantity | currency }}
-        </div>
-        
-        <button class="cart__item-remove" (click)="removeItem(item.id)">
-          <i class="fas fa-trash"></i>
-        </button>
       </div>
     </div>
-    
-    <div class="cart__summary">
-      <div class="cart__summary-row">
-        <span>Sous-total :</span>
-        <span>{{ cartService.cart().totalPrice | currency:'TND':'symbol' }}</span>
-      </div>
-      <div class="cart__summary-row">
-        <span>Livraison :</span>
-        <span>Gratuite</span>
-      </div>
-      <div class="cart__summary-row cart__summary-total">
-        <span>Total :</span>
-        <span>{{ cartService.cart().totalPrice | currency:'TND':'symbol' }}</span>
+
+    <!-- Recommended Products Section -->
+    <div class="cart__recommendations">
+      <div class="recommendations-header">
+        <h3 class="recommendations-title">Produits fréquemment achetés ensemble</h3>
+        <p class="recommendations-subtitle">Complétez votre routine avec ces produits populaires</p>
       </div>
       
-      <button class="cart__checkout-btn">
-        Passer au paiement
-      </button>
-      
-      <a routerLink="/products" class="cart__continue-shopping">
-        Continuer vos achats
-      </a>
+      <div class="recommendations-grid">
+        <div class="recommended-product" *ngFor="let product of recommendedProducts">
+          <div class="recommended-product-image" (click)="goToProduct(product.id)">
+            <img [src]="product.imageUrl" [alt]="product.name">
+          </div>
+          <div class="recommended-product-info" (click)="goToProduct(product.id)">
+            <h4 class="recommended-product-name">{{ product.name }}</h4>
+            <p class="recommended-product-category">{{ product.category }}</p>
+            <div class="recommended-product-price">
+              <span class="price">{{ product.price | currency:'TND':'symbol':'1.2-2' }}</span>
+              <span *ngIf="product.originalPrice" class="original-price">
+                {{ product.originalPrice | currency:'TND':'symbol':'1.2-2' }}
+              </span>
+            </div>
+          </div>
+          <button class="add-to-cart-btn" (click)="addRecommendedProduct(product)">
+            <i class="fas fa-plus"></i>
+            Ajouter
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   
+  <!-- Empty Cart State -->
   <ng-template #emptyCart>
     <div class="cart__empty">
-      <i class="fas fa-shopping-cart cart__empty-icon"></i>
-      <p>Votre panier est vide</p>
-      <a routerLink="/products" class="cart__empty-btn">
-        Commencer vos achats
-      </a>
+      <div class="empty-cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <h2 class="empty-cart-title">Votre panier est vide</h2>
+      <p class="empty-cart-message">Découvrez nos produits et trouvez l'essentiel pour votre routine beauté</p>
+      
+      <div class="empty-cart-actions">
+        <a routerLink="/products" class="shop-now-btn">
+          <i class="fas fa-store"></i>
+          Découvrir nos produits
+        </a>
+        <a routerLink="/categories" class="browse-categories">
+          Parcourir par catégories
+        </a>
+      </div>
+      
+      <div class="empty-cart-features">
+        <div class="feature">
+          <i class="fas fa-shipping-fast"></i>
+          <span>Livraison rapide</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-shield-alt"></i>
+          <span>Paiement sécurisé</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-undo"></i>
+          <span>Retours faciles</span>
+        </div>
+      </div>
     </div>
   </ng-template>
 </div>

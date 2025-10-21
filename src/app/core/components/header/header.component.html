@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" [class.search-open]="isSearchOpen">
   <div class="header__container">
     <div class="header__logo">
       <a routerLink="/">
@@ -10,24 +10,23 @@
       <ul class="header__nav-list">
         @for (item of navItems; track item.label) {
           <li class="header__nav-item">
-            <a [routerLink]="item.path" [queryParams]="item.queryParams || null" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">{{ item.label }}</a>
+            <a [routerLink]="item.path" [queryParams]="item.queryParams || null" 
+               routerLinkActive="active" 
+               [routerLinkActiveOptions]="{ exact: item.path === '/' }">
+              {{ item.label }}
+            </a>
           </li>
         }
       </ul>
     </nav>
 
-    <button class="header__menu-btn" (click)="menuOpen = !menuOpen" aria-label="Menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-    
-    <div class="header__actions">
-      <button class="header__action-btn" aria-label="Recherche">
+    <div class="header__search">
+      <button class="search-trigger" (click)="onSearchFocus()" aria-label="Rechercher">
         <i class="fas fa-search"></i>
       </button>
-      
-      <!-- Improved Cart Button -->
+    </div>
+
+    <div class="header__actions">
       <button class="header__cart-btn" aria-label="Panier" routerLink="/cart">
         <div class="cart-icon-wrapper">
           <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -37,20 +36,94 @@
         <span class="cart-text">Panier</span>
       </button>
       
-      <button class="header__action-btn" aria-label="Compte utilisateur">
+      <button class="header__action-btn login-btn" aria-label="Compte utilisateur">
         <i class="fas fa-user"></i>
       </button>
     </div>
+
+    <button class="header__menu-btn" (click)="menuOpen = !menuOpen" aria-label="Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
   </div>
 
-  <!-- Mobile Nav -->
   <nav class="header__mobile-nav" *ngIf="menuOpen">
+    <div class="mobile-search">
+      <app-search-bar variant="header" (search)="onSearch($event)"></app-search-bar>
+    </div>
+    
     <ul class="header__nav-list">
       @for (item of navItems; track item.label) {
         <li class="header__nav-item">
-          <a (click)="menuOpen=false" [routerLink]="item.path" [queryParams]="item.queryParams || null" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.path === '/' }">{{ item.label }}</a>
+          <a (click)="menuOpen=false" [routerLink]="item.path" 
+             [queryParams]="item.queryParams || null" 
+             routerLinkActive="active" 
+             [routerLinkActiveOptions]="{ exact: item.path === '/' }">
+            {{ item.label }}
+          </a>
         </li>
       }
     </ul>
   </nav>
 </header>
+
+<!-- Search Overlay -->
+<div class="search-overlay" *ngIf="isSearchOpen">
+  <div class="overlay__backdrop" (click)="closeOverlay()"></div>
+  <div class="overlay__modal">
+    <div class="overlay__header">
+      <app-search-bar 
+        variant="overlay" 
+        (search)="onSearch($event)" 
+        (searchFocus)="onSearchFocus()"
+        (searchBlur)="onSearchBlur()"
+        #overlaySearchBar>
+      </app-search-bar>
+      <button class="overlay__close" (click)="closeOverlay()" aria-label="Fermer la recherche">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="overlay__content">
+      <div class="overlay__left">
+        <h3 class="overlay__title">Recherches populaires</h3>
+        <div class="popular-list-container">
+          <ul class="popular-list">
+            @for (term of popularSearches; track term) {
+              <li>
+                <button class="popular-item" (click)="applyQuickSearch(term)">
+                  <i class="fas fa-search"></i>
+                  {{ term }}
+                </button>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="overlay__right">
+        <div class="overlay__right-header">
+          <h3 class="overlay__title">Produits recommandés</h3>
+          <div class="overlay__arrows">
+            <button class="arrow-btn" (click)="scrollCarousel('left')" aria-label="Précédent">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="arrow-btn" (click)="scrollCarousel('right')" aria-label="Suivant">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="overlay__carousel" #overlayCarousel>
+          @for (product of recommendedProducts; track product.id) {
+            <app-product-card [product]="product" (click)="closeOverlay()"></app-product-card>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay__footer">
+      <span class="df-credit">Powered by Bozme</span>
+    </div>
+  </div>
+</div>

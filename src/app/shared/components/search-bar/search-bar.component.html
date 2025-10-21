@@ -1,0 +1,24 @@
+<div class="search-container" [class.header-search]="variant === 'header'" [class.hero-search]="variant === 'hero'" [class.overlay-search]="variant === 'overlay'">
+  <i class="fas fa-search search-icon"></i>
+  <input 
+    #searchInput
+    type="text" 
+    class="search-input" 
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearch()"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    placeholder="Rechercher des produits..."
+    aria-label="Rechercher des produits"
+  />
+  
+  @if (searchTerm) {
+    <button 
+      class="clear-btn" 
+      (click)="clearSearch()"
+      aria-label="Effacer la recherche"
+    >
+      <i class="fas fa-times"></i>
+    </button>
+  }
+</div>
