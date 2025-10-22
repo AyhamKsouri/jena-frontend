@@ -126,7 +126,6 @@
     border-radius: 12px;
     border: 1px solid $gray-100;
     transition: all 0.3s ease;
-    cursor: pointer;
     position: relative;
     
     &:hover {
@@ -145,6 +144,12 @@
       gap: 1rem;
       padding: 1.25rem;
     }
+    
+    @media (max-width: 576px) {
+      grid-template-columns: 70px 1fr auto;
+      padding: 1rem;
+      gap: 0.75rem;
+    }
   }
   
   &__item-image {
@@ -153,12 +158,18 @@
     height: 100px;
     border-radius: 8px;
     overflow: hidden;
+    cursor: pointer;
     
     @media (max-width: 1200px) {
       grid-column: 1;
       grid-row: 1 / span 3;
       width: 80px;
       height: 80px;
+    }
+    
+    @media (max-width: 576px) {
+      width: 70px;
+      height: 70px;
     }
     
     img {
@@ -197,6 +208,7 @@
   
   &__item-details {
     min-width: 0;
+    cursor: pointer;
     
     @media (max-width: 1200px) {
       grid-column: 2 / span 2;
@@ -210,6 +222,9 @@
     color: $text-primary;
     margin: 0 0 0.5rem;
     line-height: 1.3;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   &__item-category {
@@ -222,6 +237,7 @@
     display: flex;
     gap: 1rem;
     font-size: 0.8rem;
+    flex-wrap: wrap;
   }
   
   &__item-sku {
@@ -234,6 +250,10 @@
     &.in-stock {
       color: $primary;
     }
+    
+    @media (max-width: 576px) {
+      font-size: 0.75rem;
+    }
   }
   
   &__item-price {
@@ -243,6 +263,11 @@
       grid-column: 2;
       grid-row: 2;
       text-align: left;
+    }
+    
+    @media (max-width: 576px) {
+      gap: 1rem;
+      flex-wrap: wrap;
     }
     
     .price-amount {
@@ -461,6 +486,11 @@
     padding: 1.5rem;
     background: $gray-50;
     border-radius: 12px;
+    
+    @media (max-width: 576px) {
+      gap: 0.5rem;
+      padding: 1rem;
+    }
   }
   
   .benefit-item {
@@ -520,6 +550,11 @@
     border-radius: 16px;
     box-shadow: $shadow-lg;
     padding: 2rem;
+    margin-top: 3rem;
+    
+    @media (max-width: 768px) {
+      margin-top: 2rem;
+    }
     
     @media (max-width: 576px) {
       padding: 1.5rem;
@@ -529,6 +564,10 @@
   .recommendations-header {
     text-align: center;
     margin-bottom: 2rem;
+    
+    @media (max-width: 768px) {
+      margin-bottom: 1.5rem;
+    }
   }
   
   .recommendations-title {
@@ -536,17 +575,30 @@
     font-weight: 600;
     color: $text-primary;
     margin: 0 0 0.5rem;
+    
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+    }
   }
   
   .recommendations-subtitle {
     color: $text-secondary;
     margin: 0;
+    
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
   }
   
   .recommendations-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
+    
+    @media (max-width: 576px) {
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
   }
   
   .recommended-product {

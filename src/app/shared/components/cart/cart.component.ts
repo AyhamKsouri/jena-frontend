@@ -71,7 +71,7 @@ export class CartComponent implements OnInit {
 
   // Navigate to product details - FIXED VERSION
   goToProduct(productId: string): void {
-    this.router.navigate(['/product', productId]);
+    this.router.navigate(['/products', productId]);
   }
 
   // Add recommended product to cart
